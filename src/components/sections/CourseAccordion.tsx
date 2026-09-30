@@ -1,41 +1,50 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { ArrowRight, Flame, MousePointerClick } from 'lucide-react';
+import React, { useState } from "react";
+import Image from "next/image";
+import { ArrowRight, Flame } from "lucide-react";
+
+const TECH_ICONS = [
+  { name: "React", src: "/Icons/icon1.svg" },
+  { name: "Chat", src: "/Icons/icon2.svg" },
+  { name: "Vue", src: "/Icons/icon3.svg" },
+  { name: "Design", src: "/Icons/icon4.svg" },
+];
 
 interface CardItem {
   id: string;
-  badgeCount: string;
+  number: string;
   title: string;
   subtitle: string;
 }
 
 const ACCORDION_DATA: CardItem[] = [
   {
-    id: 'all',
-    badgeCount: '23+',
-    title: 'All Courses',
+    id: "all",
+    number: "23",
+    title: "All Courses",
     subtitle: "courses you're powering through right now.",
   },
   {
-    id: 'upcoming',
-    badgeCount: '05+',
-    title: 'Upcoming Courses',
-    subtitle: 'exciting new courses waiting to boost your skills.',
+    id: "upcoming",
+    number: "05",
+    title: "Upcoming Courses",
+    subtitle: "exciting new courses waiting to boost your skills.",
   },
   {
-    id: 'ongoing',
-    badgeCount: '10+',
-    title: 'Ongoing Courses',
+    id: "ongoing",
+    number: "10",
+    title: "Ongoing Courses",
     subtitle: "currently happening—don't miss out on the action!",
   },
 ];
 
 export function CourseAccordion() {
-  const [activeId, setActiveId] = useState<string>('all');
+  // Default to 'upcoming' (Card 2) to match the reference layout
+  const [activeId, setActiveId] = useState<string>("upcoming");
 
   return (
-    <section className="w-full bg-white px-6 py-20 md:px-12 lg:px-20">
+    <section className="w-full bg-white px-6 py-20 md:px-12 lg:px-20 font-outfit">
       <div className="mx-auto max-w-7xl">
         {/* Header Block */}
         <div className="mb-12">
@@ -43,13 +52,14 @@ export function CourseAccordion() {
             Explore our classes and master trending skills!
           </p>
           <h2 className="mt-2 flex items-center gap-2 text-3xl font-extrabold tracking-tight text-slate-900 md:text-4xl">
-            Dive Into <span className="text-[#059669]">What&apos;s Hot Right Now!</span>
-            <Flame className="inline-block h-8 w-8 fill-amber-500 text-amber-500 animate-pulse" />
+            Dive Into{" "}
+            <span className="text-[#059669]">What&apos;s Hot Right Now!</span>
+            <Flame className="inline-block h-8 w-8 fill-amber-500 text-amber-500" />
           </h2>
         </div>
 
         {/* Accordion Row */}
-        <div className="flex flex-col gap-6 lg:h-[460px] lg:flex-row">
+        <div className="flex flex-col lg:flex-row gap-6 lg:h-[461px] lg:justify-center">
           {ACCORDION_DATA.map((card) => {
             const isActive = activeId === card.id;
 
@@ -60,87 +70,103 @@ export function CourseAccordion() {
                 role="button"
                 tabIndex={0}
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
+                  if (e.key === "Enter" || e.key === " ") {
                     setActiveId(card.id);
                   }
                 }}
-                className={`group relative flex cursor-pointer flex-col justify-between overflow-hidden rounded-3xl p-8 transition-all duration-500 ease-out select-none outline-none focus-visible:ring-2 focus-visible:ring-red-400 ${
+                className={`relative flex cursor-pointer flex-col justify-between rounded-[32px] p-8 sm:p-10 lg:p-11 select-none transition-all duration-500 ease-out outline-none overflow-hidden ${
                   isActive
-                    ? 'lg:flex-[2.6] bg-[#BF2837] text-white shadow-2xl'
-                    : 'lg:flex-[0.7] bg-[#FBEFEF] text-[#BF2837] hover:bg-[#fae1e1] hover:shadow-md'
+                    ? "lg:w-[592px] lg:flex-none bg-[#C33241] text-white shadow-xl"
+                    : "lg:w-[280px] lg:flex-none bg-[#F9EBEC] text-[#C33241] hover:bg-[#f1dedf]"
                 }`}
-                style={{
-                  flexGrow: isActive ? 2.6 : 0.7,
-                }}
               >
                 {isActive ? (
                   // ACTIVE EXPANDED STATE
-                  <div className="flex h-full flex-col justify-between animate-fadeIn transition-opacity duration-500">
+                  <>
+                    {/* Top Bar: View All link */}
                     <div className="flex items-center justify-end">
                       <button
                         type="button"
-                        className="group/btn flex items-center gap-2 text-xs font-semibold tracking-wide text-white/90 hover:text-white transition-all bg-white/10 hover:bg-white/20 px-3.5 py-1.5 rounded-full backdrop-blur-sm"
+                        className="flex items-center gap-2 text-sm font-semibold text-white/95 hover:text-white transition-opacity font-outfit"
                       >
-                        View all Courses
-                        <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+                        <span>View all Courses</span>
+                        <ArrowRight className="h-4 w-4" />
                       </button>
                     </div>
 
-                    {/* Floating Tech Logos */}
-                    <div className="my-8 flex flex-wrap items-center gap-4 sm:gap-5">
-                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#00D8FF] text-2xl font-bold text-white shadow-lg transition-transform hover:scale-110 hover:-translate-y-1 duration-200">
-                        ⚛
-                      </div>
-                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#FFB020] text-2xl font-bold text-white shadow-lg transition-transform hover:scale-110 hover:-translate-y-1 duration-200">
-                        💬
-                      </div>
-                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#41B883] text-2xl font-bold text-white shadow-lg transition-transform hover:scale-110 hover:-translate-y-1 duration-200">
-                        V
-                      </div>
-                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#FF5C5C] text-2xl font-bold text-white shadow-lg transition-transform hover:scale-110 hover:-translate-y-1 duration-200">
-                        🎨
-                      </div>
+                    {/* Middle: 4 Floating Tech Icons */}
+                    <div className="my-auto flex items-center justify-center gap-4 sm:gap-8 lg:gap-10 py-4 w-full">
+                      {TECH_ICONS.map((icon, idx) => (
+                        <div
+                          key={idx}
+                          className="relative flex items-center justify-center transition-transform hover:scale-105 duration-200"
+                        >
+                          <Image
+                            src={icon.src}
+                            alt={icon.name}
+                            width={76}
+                            height={76}
+                            className="h-14 w-14 sm:h-16 sm:w-16 lg:h-[76px] lg:w-[76px] object-contain select-none pointer-events-none drop-shadow-md"
+                            priority
+                          />
+                        </div>
+                      ))}
                     </div>
 
-                    {/* Bottom Metrics */}
-                    <div className="mt-auto">
-                      <div className="flex items-baseline gap-4">
-                        <span className="text-6xl font-black tracking-tight">{card.badgeCount}</span>
-                        <span className="text-2xl font-bold tracking-tight">{card.title}</span>
+                    {/* Bottom: Number, Plus, and Text Block */}
+                    <div className="mt-auto flex items-start text-white w-full">
+                      {/* Big Metric Number & Superscript Plus */}
+                      <div className="flex items-start select-none font-nohemi shrink-0">
+                        <span className="font-bold text-[90px] lg:text-[150px] leading-[0.82] tracking-normal">
+                          {card.number}
+                        </span>
+                        <span className="font-bold text-3xl lg:text-[44px] leading-none -mt-2 lg:-mt-3 ml-1">
+                          +
+                        </span>
                       </div>
-                      <p className="mt-2 text-sm font-normal text-white/85 max-w-md">{card.subtitle}</p>
-                    </div>
-                  </div>
-                ) : (
-                  // INACTIVE VERTICAL SLOT
-                  <div className="flex h-full flex-col justify-between">
-                    {/* Subtle Click Me bounce hint */}
-                    <div className="flex items-center justify-between">
-                      <div className="inline-flex items-center gap-1.5 rounded-full bg-[#BF2837]/10 px-2.5 py-1 text-[11px] font-bold text-[#BF2837] animate-bounce shadow-xs">
-                        <MousePointerClick className="h-3.5 w-3.5" />
-                        <span>Click me!</span>
-                      </div>
-                    </div>
 
-                    {/* Vertically Rotated Text */}
-                    <div className="my-auto py-4">
-                      <div className="flex flex-col items-start gap-2 [writing-mode:vertical-rl] rotate-180">
-                        <span className="text-lg font-bold tracking-tight text-[#BF2837] whitespace-nowrap">
+                      {/* Title and Subtitle Block */}
+                      <div className="flex flex-col ml-3 lg:ml-4 pt-1 font-outfit">
+                        <h3 className="font-bold text-2xl lg:text-[32px] leading-none whitespace-nowrap">
                           {card.title}
-                        </span>
-                        <span className="line-clamp-2 text-xs font-medium text-[#BF2837]/75">
+                        </h3>
+                        <p className="font-normal text-sm lg:text-[18px] leading-[1.25] mt-2 lg:mt-2.5 text-white/90 max-w-[280px]">
                           {card.subtitle}
+                        </p>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  // INACTIVE VERTICAL SPINE
+                  <>
+                    {/* Inactive Content - grouped at bottom */}
+                    <div className="mt-auto flex flex-col items-center w-full">
+                      {/* Vertical Rotated Spine Text */}
+                      <div className="w-[120px] h-[230px] flex items-center justify-center relative mb-6 lg:mb-7">
+                        <div className="w-[230px] h-[120px] -rotate-90 select-none flex flex-col items-start justify-start text-left font-outfit text-[#C33241]">
+                          <div
+                            className="font-bold text-2xl lg:text-[32px] leading-none"
+                            style={{ width: card.title.length > 12 ? "150px" : "230px" }}
+                          >
+                            {card.title}
+                          </div>
+                          <div className="font-normal text-sm lg:text-[18px] leading-[1.25] mt-2.5 text-[#C33241]/90 w-[230px]">
+                            {card.subtitle}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Inactive Metric Number with Superscript + */}
+                      <div className="flex items-start justify-center text-[#C33241] select-none w-full font-nohemi">
+                        <span className="font-bold text-[90px] lg:text-[150px] leading-[0.82] text-center">
+                          {card.number}
+                        </span>
+                        <span className="font-bold text-3xl lg:text-[44px] leading-none ml-1 -mt-2 lg:-mt-3">
+                          +
                         </span>
                       </div>
                     </div>
-
-                    {/* Bottom Counter */}
-                    <div className="mt-auto">
-                      <span className="text-5xl font-black tracking-tight text-[#BF2837]">
-                        {card.badgeCount}
-                      </span>
-                    </div>
-                  </div>
+                  </>
                 )}
               </div>
             );
