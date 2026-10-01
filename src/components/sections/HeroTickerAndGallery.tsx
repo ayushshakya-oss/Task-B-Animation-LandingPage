@@ -251,19 +251,19 @@ export function HeroTickerAndGallery() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full bg-white px-6 py-16 md:px-12 lg:px-20 overflow-hidden"
+      className="relative w-full bg-white px-4 sm:px-6 md:px-10 lg:px-12 xl:px-20 py-12 sm:py-16 lg:py-20 overflow-hidden"
     >
       <div className="mx-auto max-w-7xl">
         {/* Upper Section (Font: Oakes Grotesk) */}
-        <div className="font-oakes grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="font-oakes grid grid-cols-1 items-start gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Left Column: Description & Services Pill */}
           <div>
-            <p className="max-w-md font-oakes text-xl sm:text-2xl lg:text-[28px] font-normal leading-[1.35] tracking-tight text-slate-900 md:max-w-lg">
+            <p className="max-w-md font-oakes text-lg sm:text-2xl lg:text-[28px] font-normal leading-[1.35] tracking-tight text-slate-900 md:max-w-lg">
               Experience our expert solutions tailored to enhance your business
               with top-tier design, development, and animation.
             </p>
-            <div className="mt-8">
-              <span className="inline-flex items-center rounded-full bg-[#1A56DB] px-6 py-2 font-oakes text-xs font-semibold text-white shadow-sm transition hover:bg-blue-700 cursor-pointer">
+            <div className="mt-6 sm:mt-8">
+              <span className="inline-flex items-center rounded-full bg-[#1A56DB] px-5 py-2 sm:px-6 font-oakes text-xs font-semibold text-white shadow-sm transition hover:bg-blue-700 cursor-pointer">
                 Services
               </span>
             </div>
@@ -277,7 +277,7 @@ export function HeroTickerAndGallery() {
               return (
                 <div
                   key={line.id}
-                  className="h-12 sm:h-16 lg:h-[76px] overflow-hidden relative"
+                  className="h-10 sm:h-14 md:h-16 lg:h-[76px] overflow-hidden relative"
                 >
                   <div
                     ref={(el) => {
@@ -288,7 +288,7 @@ export function HeroTickerAndGallery() {
                     {fullItems.map((service, itemIdx) => (
                       <div
                         key={itemIdx}
-                        className="h-12 sm:h-16 lg:h-[76px] flex items-center font-oakes font-bold text-4xl sm:text-5xl lg:text-[68px] leading-none tracking-tight text-slate-900 select-none"
+                        className="h-10 sm:h-14 md:h-16 lg:h-[76px] flex items-center font-oakes font-bold text-3xl sm:text-4xl md:text-5xl lg:text-[68px] leading-none tracking-tight text-slate-900 select-none whitespace-nowrap"
                       >
                         {service}
                       </div>
@@ -301,11 +301,11 @@ export function HeroTickerAndGallery() {
         </div>
 
         {/* Draggable Carousel */}
-        <div className="relative mt-20">
-          {/* Floating Drag Badge Follower */}
+        <div className="relative mt-12 sm:mt-16 lg:mt-20">
+          {/* Floating Drag Badge Follower (Desktop only) */}
           <div
             ref={cursorRef}
-            className="pointer-events-none absolute left-0 top-0 z-20 flex h-16 w-16 items-center justify-center rounded-full bg-[#F3F4F6]/95 border border-slate-200/60 p-4 text-xs font-bold uppercase tracking-wider text-slate-700 shadow-xl backdrop-blur-md select-none"
+            className="pointer-events-none absolute left-0 top-0 z-20 hidden md:flex h-16 w-16 items-center justify-center rounded-full bg-[#F3F4F6]/95 border border-slate-200/60 p-4 text-xs font-bold uppercase tracking-wider text-slate-700 shadow-xl backdrop-blur-md select-none"
           >
             Drag
           </div>
@@ -314,7 +314,7 @@ export function HeroTickerAndGallery() {
             ref={carouselRef}
             onScroll={handleScroll}
             onMouseDown={onMouseDown}
-            className="flex cursor-grab select-none gap-6 overflow-x-auto pb-4 active:cursor-grabbing no-scrollbar will-change-scroll"
+            className="flex cursor-grab select-none gap-4 sm:gap-6 overflow-x-auto pb-4 active:cursor-grabbing no-scrollbar will-change-scroll"
             style={{
               scrollbarWidth: "none",
               msOverflowStyle: "none",
@@ -324,13 +324,13 @@ export function HeroTickerAndGallery() {
             {IMAGES.map((src, i) => (
               <div
                 key={i}
-                className="group relative h-[320px] w-[460px] shrink-0 overflow-hidden rounded-3xl bg-slate-100 shadow-md transition-transform duration-300 md:h-[400px] md:w-[620px]"
+                className="group relative h-[210px] min-[380px]:h-[240px] sm:h-[300px] md:h-[380px] lg:h-[400px] w-[280px] min-[380px]:w-[320px] sm:w-[420px] md:w-[540px] lg:w-[620px] shrink-0 overflow-hidden rounded-2xl sm:rounded-3xl bg-slate-100 shadow-md transition-transform duration-300"
               >
                 <Image
                   src={src}
                   alt={`Showcase item ${i + 1}`}
                   fill
-                  sizes="(max-width: 768px) 460px, 620px"
+                  sizes="(max-width: 640px) 320px, (max-width: 1024px) 540px, 620px"
                   className="pointer-events-none object-cover select-none transition-transform duration-500 group-hover:scale-105"
                   priority={i === 0}
                   draggable={false}
@@ -344,7 +344,7 @@ export function HeroTickerAndGallery() {
           <div
             ref={trackRef}
             onClick={handleTrackClick}
-            className="group/track relative mx-auto mt-8 h-2 w-full max-w-7xl cursor-pointer rounded-full bg-slate-100 p-0.5"
+            className="group/track relative mx-auto mt-6 sm:mt-8 h-1.5 sm:h-2 w-full max-w-7xl cursor-pointer rounded-full bg-slate-100 p-0.5"
             title="Click to seek"
           >
             <div
@@ -360,22 +360,22 @@ export function HeroTickerAndGallery() {
         </div>
 
         {/* Partners Row */}
-        <div className="mt-24 sm:mt-28 text-center">
-          <h3 className="font-oakes text-base md:text-lg font-medium text-slate-800 tracking-tight">
+        <div className="mt-16 sm:mt-24 lg:mt-28 text-center">
+          <h3 className="font-oakes text-sm sm:text-base md:text-lg font-medium text-slate-800 tracking-tight">
             Our Partners
           </h3>
-          <div className="mx-auto mt-12 sm:mt-16 flex w-full max-w-5xl flex-wrap items-center justify-between gap-8 px-4 sm:px-8 md:px-12">
+          <div className="mx-auto mt-8 sm:mt-12 lg:mt-16 grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-items-center sm:justify-between gap-6 sm:gap-8 md:gap-12 px-4 sm:px-8 md:px-12 max-w-5xl">
             {PARTNERS.map((partner, index) => (
               <div
                 key={index}
-                className="flex h-16 items-center justify-center"
+                className="flex h-12 sm:h-16 items-center justify-center"
               >
                 <Image
                   src={partner.src}
                   alt={partner.name}
                   width={150}
                   height={90}
-                  className="max-h-11 md:max-h-13 w-auto object-contain select-none pointer-events-none"
+                  className="max-h-8 sm:max-h-11 md:max-h-13 w-auto object-contain select-none pointer-events-none"
                   priority
                 />
               </div>
