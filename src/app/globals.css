@@ -43,7 +43,6 @@ body {
   font-family: var(--font-outfit), sans-serif;
 }
 
-
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
