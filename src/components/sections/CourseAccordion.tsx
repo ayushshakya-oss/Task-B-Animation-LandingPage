@@ -238,12 +238,12 @@ export function CourseAccordion() {
       <div className="mx-auto max-w-7xl">
         {/* Header Block */}
         <div className="mb-12 ml-7">
-          <p className="text-sm font-semibold tracking-wide text-slate-500 uppercase">
+          <p className="text-[24px] font-outfit font-normal">
             Explore our classes and master trending skills!
           </p>
-          <h2 className="mt-2 flex items-center gap-2 text-3xl font-extrabold tracking-tight text-slate-900 md:text-4xl">
+          <h2 className="mt-2 flex items-center gap-2 text-[32px] font-bold tracking-tight text-[#2B2B2B] md:text-4xl">
             Dive Into{" "}
-            <span className="text-[#059669]">What&apos;s Hot Right Now!</span>
+            <span className="text-[#1DA077]">What&apos;s Hot Right Now!</span>
             <Flame className="inline-block h-8 w-8 fill-amber-500 text-amber-500" />
           </h2>
         </div>
