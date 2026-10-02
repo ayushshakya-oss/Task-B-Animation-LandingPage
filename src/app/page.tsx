@@ -1,6 +1,5 @@
 import { HeroTickerAndGallery } from "@/components/sections/HeroTickerAndGallery";
 import { CourseAccordion } from "@/components/sections/CourseAccordion";
-import { FontTester } from "@/components/ui/FontTester";
 
 export default function Home() {
   return (
